@@ -1,0 +1,46 @@
+{
+	"name": "rewritejs",
+	"module": "src/index.ts",
+	"type": "module",
+	"private": false,
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.2",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@rewritejs/rest": "^1.0.1"
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"maintainers": [
+		{
+			"name": "Almeida",
+			"url": "https://github.com/almeidazs"
+		}
+	],
+	"scripts": {
+		"test": "bun test",
+		"biome:check": "biome check --write .",
+		"build": "rm -rf dist && bun run scripts/version.ts && bun biome:check && bun build src/index.ts --outdir dist --target node && bun run types",
+		"types": "bunx tsc --emitDeclarationOnly",
+		"prepublishOnly": "bun run build"
+	},
+	"engines": {
+		"node": ">=18",
+		"bun": ">=1.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rewritetoday/node.git"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"description": "An ergonomic SDK to integrate with Rewrite in your workflow"
+}
