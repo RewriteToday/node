@@ -2,7 +2,7 @@
 
 # Rewrite Node SDK
 
-[`rewritejs`](https://www.npmjs.com/package/rewritejs), the official Node.js/TypeScript SDK for the Rewrite API.
+[`@rewritejs/sdk`](https://www.npmjs.com/package/@rewritejs/sdk), the official Node.js/TypeScript SDK for the Rewrite API.
 
 It wraps authentication, typed REST calls, and resource helpers on top of [`@rewritejs/rest`](https://www.npmjs.com/package/@rewritejs/rest) and [`@rewritejs/types`](https://www.npmjs.com/package/@rewritejs/types).
 
@@ -13,13 +13,13 @@ Use your preferred package manager:
 </div>
 
 ```bash
-bun add rewritejs
+bun add @rewritejs/sdk
 # Or
-npm install rewritejs
+npm install @rewritejs/sdk
 # Or
-pnpm add rewritejs
+pnpm add @rewritejs/sdk
 # Or
-yarn add rewritejs
+yarn add @rewritejs/sdk
 ```
 
 <div align="center">
@@ -29,7 +29,7 @@ yarn add rewritejs
 </div>
 
 ```ts
-import { Rewrite } from 'rewritejs';
+import { Rewrite } from '@rewritejs/sdk';
 
 const rewrite = new Rewrite(process.env.REWRITE_API_KEY!);
 
@@ -47,7 +47,7 @@ You can pass the API key directly or use the full options object.
 </div>
 
 ```ts
-import { Rewrite } from 'rewritejs';
+import { Rewrite } from '@rewritejs/sdk';
 
 const advanced = new Rewrite({
 	secret: 'rw_live_xxx',

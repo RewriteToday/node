@@ -1,5 +1,5 @@
 {
-	"name": "rewritejs",
+	"name": "@rewritejs/sdk",
 	"module": "src/index.ts",
 	"type": "module",
 	"private": false,
