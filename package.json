@@ -3,6 +3,7 @@
 	"module": "src/index.ts",
 	"type": "module",
 	"private": false,
+	"version": "1.0.0",
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.2",
 		"@types/bun": "latest"
@@ -11,7 +12,8 @@
 		"typescript": "^5"
 	},
 	"dependencies": {
-		"@rewritejs/rest": "^1.0.1"
+		"@rewritejs/rest": "^1.0.1",
+		"@rewritejs/types": "^1.0.0"
 	},
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
