@@ -1,6 +1,6 @@
 // AUTO-GENERATED — DO NOT EDIT
 
 /**
- * Current version of [rewritejs](https://www.npmjs.com/package/rewritejs).
+ * Current version of [@rewritejs/sdk](https://www.npmjs.com/package/@rewritejs/sdk).
  */
 export const version = '1.0.0' as const;

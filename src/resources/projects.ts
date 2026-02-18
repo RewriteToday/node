@@ -8,7 +8,13 @@ import {
 } from '@rewritejs/types';
 import { Base } from './base';
 
+/**
+ * Project resource operations.
+ */
 export class Projects extends Base {
+	/**
+	 * Creates a new project.
+	 */
 	public async create(options: RESTPostCreateProjectBody) {
 		const data = await this.rest.post<RESTPostCreateProjectData>(
 			Routes.projects.create(),
@@ -18,6 +24,9 @@ export class Projects extends Base {
 		return data;
 	}
 
+	/**
+	 * Updates a project by id.
+	 */
 	public async update(id: string, options: RESTPatchUpdateProjectBody) {
 		const data = await this.rest.patch<RESTPatchUpdateProjectData>(
 			Routes.projects.update(id),
@@ -27,10 +36,16 @@ export class Projects extends Base {
 		return data;
 	}
 
+	/**
+	 * Deletes a project by id.
+	 */
 	public async delete(id: string) {
 		await this.rest.delete(Routes.projects.delete(id));
 	}
 
+	/**
+	 * Fetches a project by id.
+	 */
 	public async get(id: string) {
 		const data = await this.rest.get<RESTGetProjectData>(
 			Routes.projects.get(id),

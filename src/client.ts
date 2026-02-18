@@ -5,15 +5,31 @@ import { Templates } from './resources/templates';
 import { Webhooks } from './resources/webhooks';
 import type { RewriteOptions } from './types';
 
+/**
+ * Main SDK client for the Rewrite API.
+ */
 export class Rewrite {
+	/** Low-level REST client instance. */
 	public readonly rest: REST;
+	
+	/** Resolved API secret used for authentication. */
 	private readonly secret: string;
 
+	/** API keys resource client. */
 	public readonly apiKeys: APIKeys;
+	
+	/** Projects resource client. */
 	public readonly projects: Projects;
+	
+	/** Templates resource client. */
 	public readonly templates: Templates;
+	
+	/** Webhooks resource client. */
 	public readonly webhooks: Webhooks;
 
+	/**
+	 * Creates a new Rewrite client instance.
+	 */
 	public constructor(options: RewriteOptions | string) {
 		const resolved =
 			typeof options === 'string' ? { secret: options } : options;

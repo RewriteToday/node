@@ -8,7 +8,13 @@ import {
 } from '@rewritejs/types';
 import { Base } from './base';
 
+/**
+ * Template resource operations.
+ */
 export class Templates extends Base {
+	/**
+	 * Creates a template for a project.
+	 */
 	public async create(
 		options: RESTPostCreateTemplateBody & { project: string },
 	) {
@@ -20,6 +26,9 @@ export class Templates extends Base {
 		return data;
 	}
 
+	/**
+	 * Updates a template by id.
+	 */
 	public async update(
 		id: string,
 		options: RESTPostCreateTemplateBody & { project: string },
@@ -32,10 +41,16 @@ export class Templates extends Base {
 		return data;
 	}
 
+	/**
+	 * Deletes a template by id.
+	 */
 	public async delete(id: string, project: string) {
 		await this.rest.delete(Routes.templates.delete(project, id));
 	}
 
+	/**
+	 * Lists templates for a project.
+	 */
 	public async list(project: string, query?: RESTGetListTemplatesQueryParams) {
 		const data = await this.rest.get<RESTGetListTemplatesData>(
 			Routes.templates.list(project, query),
@@ -44,6 +59,9 @@ export class Templates extends Base {
 		return data;
 	}
 
+	/**
+	 * Fetches a template by id.
+	 */
 	public async get(id: string, project: string) {
 		const data = await this.rest.get<RESTGetTemplateData>(
 			Routes.templates.get(project, id),
