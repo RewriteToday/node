@@ -22,7 +22,11 @@ pnpm add rewritejs
 yarn add rewritejs
 ```
 
+<div align="center">
+
 ## Quick Start
+
+</div>
 
 ```ts
 import { Rewrite } from 'rewritejs';
@@ -34,9 +38,13 @@ const project = await rewrite.projects.get('123456789012345678');
 console.log({ project });
 ```
 
+<div align="center">
+
 ## Create The Client
 
 You can pass the API key directly or use the full options object.
+
+</div>
 
 ```ts
 import { Rewrite } from 'rewritejs';
@@ -56,7 +64,11 @@ const advanced = new Rewrite({
 });
 ```
 
+<div align="center">
+
 ### Projects
+
+</div>
 
 ```ts
 const project = await rewrite.projects.create({ name: 'AbacatePay Notifications' });
@@ -64,7 +76,11 @@ const project = await rewrite.projects.create({ name: 'AbacatePay Notifications'
 console.log({ project });
 ```
 
+<div align="center">
+
 ### Templates
+
+</div>
 
 ```ts
 const project = '123456789012345678';
@@ -84,7 +100,11 @@ const templates = await rewrite.templates.list(project, { limit: 20 });
 console.log({ templates });
 ```
 
+<div align="center">
+
 ### Webhooks
+
+</div>
 
 ```ts
 import { WebhookEventType, WebhookStatus } from '@rewritejs/types';
@@ -108,7 +128,11 @@ const hooks = await rewrite.webhooks.list(project, { limit: 10 });
 console.log({ hooks });
 ```
 
+<div align="center">
+
 ### API Keys
+
+</div>
 
 ```ts
 import { APIKeyScope } from '@rewritejs/types';
@@ -124,9 +148,13 @@ const key = await rewrite.apiKeys.create({
 console.log({ key });
 ```
 
+<div align="center">
+
 ## Error Handling
 
 Requests run through `@rewritejs/rest`. HTTP failures can throw `HTTPError`.
+
+</div>
 
 ```ts
 import { HTTPError } from '@rewritejs/rest';
@@ -140,7 +168,11 @@ try {
 }
 ```
 
+<div align="center">
+
 ---
 
 Made with 🤍 by the Rewrite team. <br/>
 SMS the way it should be.
+
+</div>
