@@ -11,19 +11,19 @@ import type { RewriteOptions } from './types';
 export class Rewrite {
 	/** Low-level REST client instance. */
 	public readonly rest: REST;
-	
+
 	/** Resolved API secret used for authentication. */
 	private readonly secret: string;
 
 	/** API keys resource client. */
 	public readonly apiKeys: APIKeys;
-	
+
 	/** Projects resource client. */
 	public readonly projects: Projects;
-	
+
 	/** Templates resource client. */
 	public readonly templates: Templates;
-	
+
 	/** Webhooks resource client. */
 	public readonly webhooks: Webhooks;
 
