@@ -9,10 +9,10 @@
 		"@types/bun": "latest"
 	},
 	"peerDependencies": {
-		"typescript": "^5"
+		"typescript": "^5.9.3"
 	},
 	"dependencies": {
-		"@rewritejs/rest": "^1.0.1",
+		"@rewritejs/rest": "^1.0.2",
 		"@rewritejs/types": "^1.0.0"
 	},
 	"main": "./dist/index.js",
