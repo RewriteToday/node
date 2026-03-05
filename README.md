@@ -6,6 +6,8 @@
 
 It wraps authentication, typed REST calls, and resource helpers on top of [`@rewritejs/rest`](https://www.npmjs.com/package/@rewritejs/rest) and [`@rewritejs/types`](https://www.npmjs.com/package/@rewritejs/types).
 
+<img src="https://cdn.rewritetoday.com/assets/banners/node-sdk.png" width="100%" alt="Rewrite Banner"/>
+
 ## Installation
 
 Use your preferred package manager:
