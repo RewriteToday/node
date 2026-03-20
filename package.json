@@ -1,9 +1,12 @@
 {
-	"name": "@rewritejs/sdk",
+	"name": "@rewritetoday/sdk",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rewritetoday/node.git"
+	},
+	"main": "./dist/index.js",
 	"module": "src/index.ts",
-	"type": "module",
-	"private": false,
-	"version": "1.0.1",
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.2",
 		"@types/bun": "latest"
@@ -11,12 +14,11 @@
 	"peerDependencies": {
 		"typescript": "^5.9.3"
 	},
-	"dependencies": {
-		"@rewritejs/rest": "^1.0.2",
-		"@rewritejs/types": "^1.0.0"
+	"description": "An ergonomic SDK to integrate with Rewrite in your workflow",
+	"engines": {
+		"node": ">=18",
+		"bun": ">=1.0.0"
 	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"files": [
 		"dist"
 	],
@@ -26,6 +28,10 @@
 			"url": "https://github.com/almeidazs"
 		}
 	],
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"test": "bun test",
 		"biome:check": "biome check --write .",
@@ -33,16 +39,10 @@
 		"types": "bunx tsc --emitDeclarationOnly",
 		"prepublishOnly": "bun run build"
 	},
-	"engines": {
-		"node": ">=18",
-		"bun": ">=1.0.0"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/rewritetoday/node.git"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"description": "An ergonomic SDK to integrate with Rewrite in your workflow"
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"dependencies": {
+		"@rewritetoday/rest": "^1.0.0",
+		"@rewritetoday/types": "^1.0.0"
+	}
 }
