@@ -8,7 +8,7 @@
 	"main": "./dist/index.js",
 	"module": "src/index.ts",
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.2",
+		"@biomejs/biome": "^2.4.8",
 		"@types/bun": "latest"
 	},
 	"peerDependencies": {
@@ -42,7 +42,7 @@
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"dependencies": {
-		"@rewritetoday/rest": "^1.0.0",
-		"@rewritetoday/types": "^1.0.0"
+		"@rewritetoday/rest": "^1.0.1",
+		"@rewritetoday/types": "^1.0.1"
 	}
 }
