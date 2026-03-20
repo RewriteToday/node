@@ -2,9 +2,9 @@
 
 # Rewrite Node SDK
 
-[`@rewritejs/sdk`](https://www.npmjs.com/package/@rewritejs/sdk), the official Node.js/TypeScript SDK for the Rewrite API.
+[`@rewritetoday/sdk`](https://www.npmjs.com/package/@rewritetoday/sdk), the official Node.js/TypeScript SDK for the Rewrite API.
 
-It wraps authentication, typed REST calls, and resource helpers on top of [`@rewritejs/rest`](https://www.npmjs.com/package/@rewritejs/rest) and [`@rewritejs/types`](https://www.npmjs.com/package/@rewritejs/types).
+It wraps authentication, typed REST calls, and resource helpers on top of [`@rewritetoday/rest`](https://www.npmjs.com/package/@rewritetoday/rest) and [`@rewritetoday/types`](https://www.npmjs.com/package/@rewritetoday/types).
 
 <img src="https://cdn.rewritetoday.com/assets/banners/node-sdk.png" width="100%" alt="Rewrite Banner"/>
 
@@ -15,13 +15,13 @@ Use your preferred package manager:
 </div>
 
 ```bash
-bun add @rewritejs/sdk
+bun add @rewritetoday/sdk
 # Or
-npm install @rewritejs/sdk
+npm install @rewritetoday/sdk
 # Or
-pnpm add @rewritejs/sdk
+pnpm add @rewritetoday/sdk
 # Or
-yarn add @rewritejs/sdk
+yarn add @rewritetoday/sdk
 ```
 
 <div align="center">
@@ -31,13 +31,13 @@ yarn add @rewritejs/sdk
 </div>
 
 ```ts
-import { Rewrite } from '@rewritejs/sdk';
+import { Rewrite } from '@rewritetoday/sdk';
 
 const rewrite = new Rewrite(process.env.REWRITE_API_KEY!);
 
-const project = await rewrite.projects.get('123456789012345678');
+const { data } = await rewrite.webhooks.get('123456789012345678');
 
-console.log({ project });
+console.log({ data });
 ```
 
 <div align="center">
@@ -49,10 +49,10 @@ You can pass the API key directly or use the full options object.
 </div>
 
 ```ts
-import { Rewrite } from '@rewritejs/sdk';
+import { Rewrite } from '@rewritetoday/sdk';
 
 const advanced = new Rewrite({
-	secret: 'rw_live_xxx',
+	secret: 'rw_xxx',
 	rest: {
 		timeout: 10_000,
 		headers: {
@@ -68,98 +68,14 @@ const advanced = new Rewrite({
 
 <div align="center">
 
-### Projects
-
-</div>
-
-```ts
-const project = await rewrite.projects.create({ name: 'AbacatePay Notifications' });
-
-console.log({ project });
-```
-
-<div align="center">
-
-### Templates
-
-</div>
-
-```ts
-const project = '123456789012345678';
-
-const created = await rewrite.templates.create({
-	project,
-	name: 'welcome_sms',
-	content: 'Hey {{name}}, welcome to {{company}}!',
-	variables: [
-		{ name: 'name', fallback: 'customer' },
-		{ name: 'company', fallback: 'Rewrite' },
-	],
-});
-
-const templates = await rewrite.templates.list(project, { limit: 20 });
-
-console.log({ templates });
-```
-
-<div align="center">
-
-### Webhooks
-
-</div>
-
-```ts
-import { WebhookEventType, WebhookStatus } from '@rewritejs/types';
-
-const project = '123456789012345678';
-
-const hook = await rewrite.webhooks.create({
-	project,
-	name: 'delivery-events',
-	endpoint: 'https://example.com/rewrite/webhooks',
-	events: [WebhookEventType.SMSDelivered, WebhookEventType.SMSFailed],
-});
-
-await rewrite.webhooks.update(hook.data.id, {
-	project,
-	status: WebhookStatus.Inactive,
-});
-
-const hooks = await rewrite.webhooks.list(project, { limit: 10 });
-
-console.log({ hooks });
-```
-
-<div align="center">
-
-### API Keys
-
-</div>
-
-```ts
-import { APIKeyScope } from '@rewritejs/types';
-
-const project = '123456789012345678';
-
-const key = await rewrite.apiKeys.create({
-	project,
-	name: 'backend-prod',
-	scopes: [APIKeyScope.ReadProject, APIKeyScope.ReadTemplates],
-});
-
-console.log({ key });
-```
-
-<div align="center">
-
 ## Error Handling
 
-Requests run through `@rewritejs/rest`. HTTP failures can throw `HTTPError`.
+Requests run through `@rewritetoday/rest`. HTTP failures can throw `HTTPError`.
 
 </div>
 
 ```ts
-import { HTTPError } from '@rewritejs/rest';
+import { HTTPError } from '@rewritetoday/rest';
 
 try {
 	await rewrite.projects.get('invalid_id');
@@ -171,8 +87,6 @@ try {
 ```
 
 <div align="center">
-
----
 
 Made with 🤍 by the Rewrite team. <br/>
 SMS the way it should be.

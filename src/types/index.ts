@@ -1,4 +1,4 @@
-import type { RESTOptions } from '@rewritejs/rest';
+import type { RESTOptions } from '@rewritetoday/rest';
 
 /**
  * Options used to initialize the Rewrite client.

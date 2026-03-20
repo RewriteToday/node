@@ -1,4 +1,5 @@
 import {
+	type RESTDeleteWebhookData,
 	type RESTGetListWebhooksData,
 	type RESTGetListWebhooksQueryParams,
 	type RESTGetWebhookData,
@@ -7,7 +8,8 @@ import {
 	type RESTPostCreateWebhookBody,
 	type RESTPostCreateWebhookData,
 	Routes,
-} from '@rewritejs/types';
+	type Snowflake,
+} from '@rewritetoday/types';
 import { Base } from './base';
 
 /**
@@ -17,58 +19,45 @@ export class Webhooks extends Base {
 	/**
 	 * Creates a webhook for a project.
 	 */
-	public async create(
-		options: RESTPostCreateWebhookBody & { project: string },
-	) {
-		const data = await this.rest.post<RESTPostCreateWebhookData>(
-			Routes.webhooks.create(options.project),
+	public async create(options: RESTPostCreateWebhookBody) {
+		return await this.rest.post<RESTPostCreateWebhookData>(
+			Routes.webhooks.create(),
 			options,
 		);
-
-		return data;
 	}
 
 	/**
 	 * Updates a webhook by id.
 	 */
-	public async update(
-		id: string,
-		options: RESTPatchUpdateWebhookBody & { project: string },
-	) {
-		const data = await this.rest.patch<RESTPatchUpdateWebhookData>(
-			Routes.webhooks.update(options.project, id),
+	public async update(id: Snowflake, options: RESTPatchUpdateWebhookBody) {
+		return await this.rest.patch<RESTPatchUpdateWebhookData>(
+			Routes.webhooks.update(id),
 			options,
 		);
-
-		return data;
 	}
 
 	/**
 	 * Deletes a webhook by id.
 	 */
-	public async delete(id: string, project: string) {
-		await this.rest.delete(Routes.webhooks.delete(project, id));
+	public async delete(id: Snowflake) {
+		return await this.rest.delete<RESTDeleteWebhookData>(
+			Routes.webhooks.delete(id),
+		);
 	}
 
 	/**
 	 * Lists webhooks for a project.
 	 */
-	public async list(project: string, query?: RESTGetListWebhooksQueryParams) {
-		const data = await this.rest.get<RESTGetListWebhooksData>(
-			Routes.webhooks.list(project, query),
+	public async list(options?: RESTGetListWebhooksQueryParams) {
+		return await this.rest.get<RESTGetListWebhooksData>(
+			Routes.webhooks.list(options),
 		);
-
-		return data;
 	}
 
 	/**
 	 * Fetches a webhook by id.
 	 */
-	public async get(id: string, project: string) {
-		const data = await this.rest.get<RESTGetWebhookData>(
-			Routes.webhooks.get(project, id),
-		);
-
-		return data;
+	public async get(id: Snowflake) {
+		return await this.rest.get<RESTGetWebhookData>(Routes.webhooks.get(id));
 	}
 }

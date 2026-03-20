@@ -1,6 +1,8 @@
-import { REST } from '@rewritejs/rest';
+import { REST } from '@rewritetoday/rest';
 import { APIKeys } from './resources/apiKeys';
-import { Projects } from './resources/projects';
+import { Logs } from './resources/logs';
+import { Messages } from './resources/message';
+import { OTP } from './resources/otp';
 import { Templates } from './resources/templates';
 import { Webhooks } from './resources/webhooks';
 import type { RewriteOptions } from './types';
@@ -15,17 +17,23 @@ export class Rewrite {
 	/** Resolved API secret used for authentication. */
 	private readonly secret: string;
 
-	/** API keys resource client. */
+	/** OTP resource client. */
+	public readonly otp: OTP;
+
+	/** Webhook logs resource client. */
+	public readonly logs: Logs;
+
+	/** API key resource client. */
 	public readonly apiKeys: APIKeys;
 
-	/** Projects resource client. */
-	public readonly projects: Projects;
+	/** Messages resource client. */
+	public readonly messages: Messages;
 
-	/** Templates resource client. */
-	public readonly templates: Templates;
-
-	/** Webhooks resource client. */
+	/** Webhook resource client. */
 	public readonly webhooks: Webhooks;
+
+	/** Template resource client. */
+	public readonly templates: Templates;
 
 	/**
 	 * Creates a new Rewrite client instance.
@@ -44,9 +52,11 @@ export class Rewrite {
 			auth: this.secret,
 		});
 
+		this.otp = new OTP(this.rest);
+		this.logs = new Logs(this.rest);
 		this.apiKeys = new APIKeys(this.rest);
-		this.projects = new Projects(this.rest);
-		this.templates = new Templates(this.rest);
 		this.webhooks = new Webhooks(this.rest);
+		this.messages = new Messages(this.rest);
+		this.templates = new Templates(this.rest);
 	}
 }

@@ -1,4 +1,4 @@
-import type { REST } from '@rewritejs/rest';
+import type { REST } from '@rewritetoday/rest';
 
 /**
  * Shared base resource with access to the REST client.

@@ -1,11 +1,13 @@
 import {
+	type RESTDeleteTemplateData,
 	type RESTGetListTemplatesData,
 	type RESTGetListTemplatesQueryParams,
 	type RESTGetTemplateData,
 	type RESTPostCreateTemplateBody,
 	type RESTPostCreateTemplateData,
 	Routes,
-} from '@rewritejs/types';
+	type Snowflake,
+} from '@rewritetoday/types';
 import { Base } from './base';
 
 /**
@@ -15,58 +17,45 @@ export class Templates extends Base {
 	/**
 	 * Creates a template for a project.
 	 */
-	public async create(
-		options: RESTPostCreateTemplateBody & { project: string },
-	) {
-		const data = await this.rest.post<RESTPostCreateTemplateData>(
-			Routes.templates.create(options.project),
+	public async create(options: RESTPostCreateTemplateBody) {
+		return await this.rest.post<RESTPostCreateTemplateData>(
+			Routes.templates.create(),
 			options,
 		);
-
-		return data;
 	}
 
 	/**
 	 * Updates a template by id.
 	 */
-	public async update(
-		id: string,
-		options: RESTPostCreateTemplateBody & { project: string },
-	) {
-		const data = await this.rest.patch<RESTPostCreateTemplateData>(
-			Routes.templates.update(options.project, id),
+	public async update(id: Snowflake, options: RESTPostCreateTemplateBody) {
+		return await this.rest.patch<RESTPostCreateTemplateData>(
+			Routes.templates.update(id),
 			options,
 		);
-
-		return data;
 	}
 
 	/**
 	 * Deletes a template by id.
 	 */
-	public async delete(id: string, project: string) {
-		await this.rest.delete(Routes.templates.delete(project, id));
+	public async delete(id: Snowflake) {
+		return await this.rest.delete<RESTDeleteTemplateData>(
+			Routes.templates.delete(id),
+		);
 	}
 
 	/**
 	 * Lists templates for a project.
 	 */
-	public async list(project: string, query?: RESTGetListTemplatesQueryParams) {
-		const data = await this.rest.get<RESTGetListTemplatesData>(
-			Routes.templates.list(project, query),
+	public async list(options?: RESTGetListTemplatesQueryParams) {
+		return await this.rest.get<RESTGetListTemplatesData>(
+			Routes.templates.list(options),
 		);
-
-		return data;
 	}
 
 	/**
 	 * Fetches a template by id.
 	 */
-	public async get(id: string, project: string) {
-		const data = await this.rest.get<RESTGetTemplateData>(
-			Routes.templates.get(project, id),
-		);
-
-		return data;
+	public async get(id: Snowflake) {
+		return await this.rest.get<RESTGetTemplateData>(Routes.templates.get(id));
 	}
 }
