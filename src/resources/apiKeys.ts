@@ -1,10 +1,10 @@
 import { type RESTDeleteAPIKeyData, Routes } from '@rewritetoday/types';
-import { Base } from './base';
+import { BaseManager } from './base';
 
 /**
  * API key resource operations.
  */
-export class APIKeys extends Base {
+export class APIKeyManager extends BaseManager {
 	/**
 	 * Deletes an API key by id.
 	 */

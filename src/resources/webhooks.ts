@@ -10,12 +10,12 @@ import {
 	Routes,
 	type Snowflake,
 } from '@rewritetoday/types';
-import { Base } from './base';
+import { BaseManager } from './base';
 
 /**
  * Webhook resource operations.
  */
-export class Webhooks extends Base {
+export class WebhookManager extends BaseManager {
 	/**
 	 * Creates a webhook for a project.
 	 */

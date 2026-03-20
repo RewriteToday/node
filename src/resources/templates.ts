@@ -8,12 +8,12 @@ import {
 	Routes,
 	type Snowflake,
 } from '@rewritetoday/types';
-import { Base } from './base';
+import { BaseManager } from './base';
 
 /**
  * Template resource operations.
  */
-export class Templates extends Base {
+export class TemplateManager extends BaseManager {
 	/**
 	 * Creates a template for a project.
 	 */

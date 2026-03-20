@@ -4,9 +4,9 @@ import {
 	Routes,
 } from '@rewritetoday/types';
 import type { SendOTPMessageOptions, VerifyOTPOptions } from '../types/otp';
-import { Base } from './base';
+import { BaseManager } from './base';
 
-export class OTP extends Base {
+export class OTPManager extends BaseManager {
 	public async send({ idempotencyKey, ...body }: SendOTPMessageOptions) {
 		return await this.rest.post<RESTPostSendOTPMessageData>(
 			Routes.otp.send(),

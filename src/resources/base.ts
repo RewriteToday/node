@@ -3,7 +3,7 @@ import type { REST } from '@rewritetoday/rest';
 /**
  * Shared base resource with access to the REST client.
  */
-export abstract class Base {
+export abstract class BaseManager {
 	/** REST client used by resource operations. */
 	public readonly rest: REST;
 

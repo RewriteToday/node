@@ -12,9 +12,9 @@ import type {
 	SendBatchMessageOptions,
 	SendMessageOptions,
 } from '../types/message';
-import { Base } from './base';
+import { BaseManager } from './base';
 
-export class Messages extends Base {
+export class MessageManager extends BaseManager {
 	public async send({ idempotencyKey, ...body }: SendMessageOptions) {
 		return await this.rest.post<RESTPostSendMessageData>(
 			Routes.messages.send(),

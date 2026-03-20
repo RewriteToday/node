@@ -1,10 +1,10 @@
 import { REST } from '@rewritetoday/rest';
-import { APIKeys } from './resources/apiKeys';
-import { Logs } from './resources/logs';
-import { Messages } from './resources/message';
-import { OTP } from './resources/otp';
-import { Templates } from './resources/templates';
-import { Webhooks } from './resources/webhooks';
+import { APIKeyManager } from './resources/apiKeys';
+import { LogManager } from './resources/logs';
+import { MessageManager } from './resources/message';
+import { OTPManager } from './resources/otp';
+import { TemplateManager } from './resources/templates';
+import { WebhookManager } from './resources/webhooks';
 import type { RewriteOptions } from './types';
 
 /**
@@ -18,22 +18,22 @@ export class Rewrite {
 	private readonly secret: string;
 
 	/** OTP resource client. */
-	public readonly otp: OTP;
+	public readonly otp: OTPManager;
 
 	/** Webhook logs resource client. */
-	public readonly logs: Logs;
+	public readonly logs: LogManager;
 
 	/** API key resource client. */
-	public readonly apiKeys: APIKeys;
+	public readonly apiKeys: APIKeyManager;
 
 	/** Messages resource client. */
-	public readonly messages: Messages;
+	public readonly messages: MessageManager;
 
 	/** Webhook resource client. */
-	public readonly webhooks: Webhooks;
+	public readonly webhooks: WebhookManager;
 
 	/** Template resource client. */
-	public readonly templates: Templates;
+	public readonly templates: TemplateManager;
 
 	/**
 	 * Creates a new Rewrite client instance.
@@ -52,11 +52,11 @@ export class Rewrite {
 			auth: this.secret,
 		});
 
-		this.otp = new OTP(this.rest);
-		this.logs = new Logs(this.rest);
-		this.apiKeys = new APIKeys(this.rest);
-		this.webhooks = new Webhooks(this.rest);
-		this.messages = new Messages(this.rest);
-		this.templates = new Templates(this.rest);
+		this.otp = new OTPManager(this.rest);
+		this.logs = new LogManager(this.rest);
+		this.apiKeys = new APIKeyManager(this.rest);
+		this.webhooks = new WebhookManager(this.rest);
+		this.messages = new MessageManager(this.rest);
+		this.templates = new TemplateManager(this.rest);
 	}
 }

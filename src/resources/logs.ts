@@ -5,12 +5,12 @@ import {
 	Routes,
 	type Snowflake,
 } from '@rewritetoday/types';
-import { Base } from './base';
+import { BaseManager } from './base';
 
 /**
  * Webhook logs resource operations.
  */
-export class Logs extends Base {
+export class LogManager extends BaseManager {
 	/**
 	 * Deletes an API key by id.
 	 */
