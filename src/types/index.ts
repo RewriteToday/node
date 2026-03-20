@@ -10,3 +10,6 @@ export interface RewriteOptions {
 	/** Extra REST client options, excluding auth. */
 	rest?: Omit<RESTOptions, 'auth'>;
 }
+
+export * from './message';
+export * from './otp';

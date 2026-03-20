@@ -1,10 +1,10 @@
 import { REST } from '@rewritetoday/rest';
-import { APIKeyManager } from './resources/apiKeys';
+import { APIKeyManager } from './resources/api-key';
 import { LogManager } from './resources/logs';
 import { MessageManager } from './resources/message';
 import { OTPManager } from './resources/otp';
-import { TemplateManager } from './resources/templates';
-import { WebhookManager } from './resources/webhooks';
+import { TemplateManager } from './resources/template';
+import { WebhookManager } from './resources/webhook';
 import type { RewriteOptions } from './types';
 
 /**
