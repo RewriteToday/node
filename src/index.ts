@@ -1,3 +1,5 @@
+export * from '@rewritetoday/types';
+
 export { Rewrite } from './client';
 export { APIKeyManager } from './resources/api-key';
 export { LogManager } from './resources/logs';
