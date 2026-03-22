@@ -2,7 +2,7 @@
 
 # Rewrite Node SDK
 
-[`@rewritetoday/sdk`](https://www.npmjs.com/package/@rewritetoday/sdk), the official Node.js/TypeScript SDK for the Rewrite API.
+[`@rewritetoday/sdk`](https://docs.rewritetoday.com/en/sdks/node), the official Node.js/TypeScript SDK for the Rewrite API.
 
 It wraps authentication, typed REST calls, and resource helpers on top of [`@rewritetoday/rest`](https://www.npmjs.com/package/@rewritetoday/rest) and [`@rewritetoday/types`](https://www.npmjs.com/package/@rewritetoday/types).
 
@@ -20,29 +20,25 @@ bun add @rewritetoday/sdk
 npm install @rewritetoday/sdk
 # Or
 pnpm add @rewritetoday/sdk
-# Or
-yarn add @rewritetoday/sdk
 ```
 
 <div align="center">
 
-## Quick Start
+## Setup
+
+First, you need to create an API key in the [Rewrite Dashboard](https://dash.rewritetoday.com/api-keys) and use it in the constructor.
 
 </div>
 
 ```ts
 import { Rewrite } from '@rewritetoday/sdk';
 
-const rewrite = new Rewrite(process.env.REWRITE_API_KEY!);
-
-const { data } = await rewrite.webhooks.get('123456789012345678');
-
-console.log({ data });
+const rewrite = new Rewrite(process.env.REWRITE_API_KEY);
 ```
 
 <div align="center">
 
-## Create The Client
+## Create the client
 
 You can pass the API key directly or use the full options object.
 
@@ -51,22 +47,39 @@ You can pass the API key directly or use the full options object.
 ```ts
 import { Rewrite } from '@rewritetoday/sdk';
 
-const advanced = new Rewrite({
-	secret: 'rw_xxx',
+const rewrite = new Rewrite({
+	secret: 'rw_...',
 	rest: {
 		timeout: 10_000,
 		headers: {
-			'x-trace-id': 'my-service',
+			'User-Agent': 'StatusPage One (1.0.0)',
 		},
 		retry: {
 			max: 3,
-			delay: (attempt) => attempt * 250,
+			delay(attempt) {
+				return attempt * 250;
+			},
 		},
 	},
 });
 ```
 
 <div align="center">
+
+## Send your first message
+
+</div>
+
+```ts
+const { data, error } = await rewrite.messages.send({
+	to: '+551234567890',
+	content: 'Hey, Rewrite is here!',
+});
+```
+
+<div align="center">
+
+You can view in our [documentation](https://docs.rewritetoday.com/api-reference/messages/send-a-message) everything in you can use when sending a message.
 
 ## Error Handling
 
