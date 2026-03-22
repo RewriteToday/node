@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from 'node:crypto';
 import {
 	type RESTDeleteWebhookData,
 	type RESTGetListWebhooksData,
@@ -10,12 +11,48 @@ import {
 	Routes,
 	type Snowflake,
 } from '@rewritetoday/types';
+import type { VerifyWebhookOptions } from '../types/webhook';
 import { BaseManager } from './base';
 
 /**
  * Webhook resource operations.
  */
 export class WebhookManager extends BaseManager {
+	public verify({
+		headers,
+		payload,
+		secret = process.env.REWRITE_WEBHOOK_SECRET,
+	}: VerifyWebhookOptions) {
+		if (!secret)
+			throw new Error('Rewrite could not find a webhook secret to verify.');
+
+		const value = secret.startsWith('whsec_')
+			? secret.slice('whsec_'.length)
+			: secret;
+
+		const key = secret.startsWith('rw_whsec_')
+			? Buffer.from(secret)
+			: /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=?)?$/.test(
+						value,
+					)
+				? Buffer.from(value, 'base64')
+				: null;
+
+		const signature = headers['svix-signature']?.split(',')[1];
+
+		if (!key || !headers['svix-id'] || !headers['svix-timestamp'] || !signature)
+			return false;
+
+		const expected = createHmac('sha256', key)
+			.update(`${headers['svix-id']}.${headers['svix-timestamp']}.${payload}`)
+			.digest('base64');
+
+		return (
+			signature.length === expected.length &&
+			timingSafeEqual(Buffer.from(signature), Buffer.from(expected))
+		);
+	}
+
 	/**
 	 * Creates a webhook for a project.
 	 */
