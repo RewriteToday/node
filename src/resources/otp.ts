@@ -8,14 +8,14 @@ import { BaseManager } from './base';
 
 export class OTPManager extends BaseManager {
 	public async send({ idempotencyKey, ...body }: SendOTPMessageOptions) {
+		const headers = {} as Record<string, string>;
+
+		if (idempotencyKey) headers['Idempotency-Key'] = idempotencyKey;
+
 		return await this.rest.post<RESTPostSendOTPMessageData>(
 			Routes.otp.send(),
 			body,
-			{
-				headers: {
-					'Idempotency-Key': idempotencyKey ?? '',
-				},
-			},
+			{ headers },
 		);
 	}
 

@@ -16,14 +16,14 @@ import { BaseManager } from './base';
 
 export class MessageManager extends BaseManager {
 	public async send({ idempotencyKey, ...body }: SendMessageOptions) {
+		const headers = {} as Record<string, string>;
+
+		if (idempotencyKey) headers['Idempotency-Key'] = idempotencyKey;
+
 		return await this.rest.post<RESTPostSendMessageData>(
 			Routes.messages.send(),
 			body,
-			{
-				headers: {
-					'Idempotency-Key': idempotencyKey ?? '',
-				},
-			},
+			{ headers },
 		);
 	}
 
@@ -37,14 +37,14 @@ export class MessageManager extends BaseManager {
 		body: RESTPostSendBatchMessagesBody,
 		{ idempotencyKey }: SendBatchMessageOptions,
 	) {
+		const headers = {} as Record<string, string>;
+
+		if (idempotencyKey) headers['Idempotency-Key'] = idempotencyKey;
+
 		return await this.rest.post<RESTPostSendBatchMessagesData>(
 			Routes.messages.batch(),
 			body,
-			{
-				headers: {
-					'Idempotency-Key': idempotencyKey ?? '',
-				},
-			},
+			{ headers },
 		);
 	}
 
