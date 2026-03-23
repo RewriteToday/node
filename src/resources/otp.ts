@@ -6,7 +6,13 @@ import {
 import type { SendOTPMessageOptions, VerifyOTPOptions } from '../types/otp';
 import { BaseManager } from './base';
 
+/**
+ * OTP resource operations.
+ */
 export class OTPManager extends BaseManager {
+	/**
+	 * Sends an OTP message.
+	 */
 	public async send({ idempotencyKey, ...body }: SendOTPMessageOptions) {
 		const headers = {} as Record<string, string>;
 
@@ -19,6 +25,9 @@ export class OTPManager extends BaseManager {
 		);
 	}
 
+	/**
+	 * Verifies an OTP code for a message.
+	 */
 	public async verify({ id, ...body }: VerifyOTPOptions) {
 		return await this.rest.post<RESTPostVerifyOTPCodeData>(
 			Routes.otp.verify(id),

@@ -14,7 +14,13 @@ import type {
 } from '../types/message';
 import { BaseManager } from './base';
 
+/**
+ * Message resource operations.
+ */
 export class MessageManager extends BaseManager {
+	/**
+	 * Sends a single message.
+	 */
 	public async send({ idempotencyKey, ...body }: SendMessageOptions) {
 		const headers = {} as Record<string, string>;
 
@@ -27,12 +33,18 @@ export class MessageManager extends BaseManager {
 		);
 	}
 
+	/**
+	 * Lists messages for a project.
+	 */
 	public async list(options?: RESTGetListMessagesQueryParams) {
 		return await this.rest.get<RESTGetListMessagesData>(
 			Routes.messages.list(options),
 		);
 	}
 
+	/**
+	 * Sends a batch of messages.
+	 */
 	public async batch(
 		body: RESTPostSendBatchMessagesBody,
 		{ idempotencyKey }: SendBatchMessageOptions,
@@ -48,12 +60,18 @@ export class MessageManager extends BaseManager {
 		);
 	}
 
+	/**
+	 * Cancels a message by id.
+	 */
 	public async cancel(id: string) {
 		return await this.rest.post<RESTPostCancelMessageData>(
 			Routes.messages.cancel(id),
 		);
 	}
 
+	/**
+	 * Fetches a message by id.
+	 */
 	public async get(id: string) {
 		return await this.rest.get<RESTGetMessageData>(Routes.messages.get(id));
 	}

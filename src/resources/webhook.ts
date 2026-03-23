@@ -18,6 +18,14 @@ import { BaseManager } from './base';
  * Webhook resource operations.
  */
 export class WebhookManager extends BaseManager {
+	/**
+	 * Verifies whether a webhook payload was signed by Rewrite.
+	 *
+	 * Uses `process.env.REWRITE_WEBHOOK_SECRET` when no secret is provided and
+	 * returns `false` when the expected Svix headers or signature are missing.
+	 *
+	 * @throws {Error} When no webhook secret is available for verification.
+	 */
 	public verify({
 		headers,
 		payload,
