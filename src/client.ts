@@ -1,8 +1,10 @@
 import { REST } from '@rewritetoday/rest';
 import { APIKeyManager } from './resources/api-key';
+import { ContactManager } from './resources/contact';
 import { LogManager } from './resources/logs';
 import { MessageManager } from './resources/message';
 import { OTPManager } from './resources/otp';
+import { SegmentManager } from './resources/segment';
 import { TemplateManager } from './resources/template';
 import { WebhookManager } from './resources/webhook';
 import type { RewriteOptions } from './types';
@@ -19,6 +21,12 @@ export class Rewrite {
 
 	/** OTP resource client. */
 	public readonly otp: OTPManager;
+
+	/** Contact resource client. */
+	public readonly contacts: ContactManager;
+
+	/** Segment resource client. */
+	public readonly segments: SegmentManager;
 
 	/** Webhook logs resource client. */
 	public readonly logs: LogManager;
@@ -53,6 +61,8 @@ export class Rewrite {
 		});
 
 		this.otp = new OTPManager(this.rest);
+		this.contacts = new ContactManager(this.rest);
+		this.segments = new SegmentManager(this.rest);
 		this.logs = new LogManager(this.rest);
 		this.apiKeys = new APIKeyManager(this.rest);
 		this.webhooks = new WebhookManager(this.rest);

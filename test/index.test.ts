@@ -1,8 +1,18 @@
 import { describe, expect, test } from 'bun:test';
 import { createHmac } from 'node:crypto';
+import { Rewrite } from '../src/client';
 import { WebhookManager } from '../src/resources/webhook';
 
 const webhooks = new WebhookManager({} as never);
+
+describe('Rewrite', () => {
+	test('exposes contacts and segments managers', () => {
+		const rewrite = new Rewrite('rw_test');
+
+		expect(rewrite.contacts).toBeDefined();
+		expect(rewrite.segments).toBeDefined();
+	});
+});
 
 describe('WebhookManager.verify', () => {
 	test('returns true for valid svix headers', () => {

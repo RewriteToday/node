@@ -3,6 +3,9 @@ import {
 	type RESTGetListTemplatesData,
 	type RESTGetListTemplatesQueryParams,
 	type RESTGetTemplateData,
+	type RESTGetTemplateQueryParams,
+	type RESTPatchUpdateTemplateBody,
+	type RESTPatchUpdateTemplateData,
 	type RESTPostCreateTemplateBody,
 	type RESTPostCreateTemplateData,
 	Routes,
@@ -27,8 +30,8 @@ export class TemplateManager extends BaseManager {
 	/**
 	 * Updates a template by id.
 	 */
-	public async update(id: Snowflake, options: RESTPostCreateTemplateBody) {
-		return await this.rest.patch<RESTPostCreateTemplateData>(
+	public async update(id: Snowflake, options: RESTPatchUpdateTemplateBody) {
+		return await this.rest.patch<RESTPatchUpdateTemplateData>(
 			Routes.templates.update(id),
 			options,
 		);
@@ -53,9 +56,11 @@ export class TemplateManager extends BaseManager {
 	}
 
 	/**
-	 * Fetches a template by id.
+	 * Fetches a template by id or name.
 	 */
-	public async get(id: Snowflake) {
-		return await this.rest.get<RESTGetTemplateData>(Routes.templates.get(id));
+	public async get(identifier: string, options?: RESTGetTemplateQueryParams) {
+		return await this.rest.get<RESTGetTemplateData>(
+			Routes.templates.get(identifier, options),
+		);
 	}
 }

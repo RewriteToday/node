@@ -7,6 +7,7 @@ import {
 	type RESTPostSendBatchMessagesData,
 	type RESTPostSendMessageData,
 	Routes,
+	type Snowflake,
 } from '@rewritetoday/types';
 import type {
 	SendBatchMessageOptions,
@@ -63,7 +64,7 @@ export class MessageManager extends BaseManager {
 	/**
 	 * Cancels a message by id.
 	 */
-	public async cancel(id: string) {
+	public async cancel(id: Snowflake) {
 		return await this.rest.post<RESTPostCancelMessageData>(
 			Routes.messages.cancel(id),
 		);
@@ -72,7 +73,7 @@ export class MessageManager extends BaseManager {
 	/**
 	 * Fetches a message by id.
 	 */
-	public async get(id: string) {
+	public async get(id: Snowflake) {
 		return await this.rest.get<RESTGetMessageData>(Routes.messages.get(id));
 	}
 }

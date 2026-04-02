@@ -6,10 +6,10 @@
       "name": "node",
       "dependencies": {
         "@rewritetoday/rest": "^1.0.1",
-        "@rewritetoday/types": "^1.0.1",
+        "@rewritetoday/types": "^1.0.4",
       },
       "devDependencies": {
-        "@biomejs/biome": "^2.4.8",
+        "@biomejs/biome": "^2.4.10",
         "@types/bun": "latest",
       },
       "peerDependencies": {
