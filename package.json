@@ -1,12 +1,19 @@
 {
-	"name": "@rewritetoday/sdk",
-	"version": "1.0.2",
+	"name": "rewritetoday",
+	"version": "1.0.0",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/rewritetoday/node.git"
 	},
 	"main": "./dist/index.js",
-	"module": "src/index.ts",
+	"module": "./dist/index.js",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		}
+	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.10",
 		"@types/bun": "latest"

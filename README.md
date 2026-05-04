@@ -2,7 +2,7 @@
 
 # Rewrite Node SDK
 
-[`@rewritetoday/sdk`](https://docs.rewritetoday.com/en/sdks/node), the official Node.js/TypeScript SDK for the Rewrite API.
+[`rewritetoday`](https://docs.rewritetoday.com/en/sdks/node), the official Node.js/TypeScript SDK for the Rewrite API.
 
 It wraps authentication, typed REST calls, and resource helpers on top of [`@rewritetoday/rest`](https://www.npmjs.com/package/@rewritetoday/rest) and [`@rewritetoday/types`](https://www.npmjs.com/package/@rewritetoday/types).
 
@@ -15,11 +15,11 @@ Use your preferred package manager:
 </div>
 
 ```bash
-bun add @rewritetoday/sdk
+bun add rewritetoday
 # Or
-npm install @rewritetoday/sdk
+npm install rewritetoday
 # Or
-pnpm add @rewritetoday/sdk
+pnpm add rewritetoday
 ```
 
 <div align="center">
@@ -31,7 +31,7 @@ First, you need to create an API key in the [Rewrite Dashboard](https://dash.rew
 </div>
 
 ```ts
-import { Rewrite } from '@rewritetoday/sdk';
+import { Rewrite } from 'rewritetoday';
 
 const rewrite = new Rewrite(process.env.REWRITE_API_KEY);
 ```
@@ -45,20 +45,14 @@ You can pass the API key directly or use the full options object.
 </div>
 
 ```ts
-import { Rewrite } from '@rewritetoday/sdk';
+import { Rewrite } from 'rewritetoday';
 
 const rewrite = new Rewrite({
-	secret: 'rw_...',
+	secret: process.env.REWRITE_API_KEY,
 	rest: {
 		timeout: 10_000,
 		headers: {
-			'User-Agent': 'StatusPage One (1.0.0)',
-		},
-		retry: {
-			max: 3,
-			delay(attempt) {
-				return attempt * 250;
-			},
+			'User-Agent': 'GetMonitor API (1.0.0)',
 		},
 	},
 });
