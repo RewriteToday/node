@@ -1,10 +1,12 @@
 import { REST } from '@rewritetoday/rest';
 import { APIKeyManager } from './resources/api-key';
 import { ContactManager } from './resources/contact';
+import { DeliveryManager } from './resources/delivery';
 import { LogManager } from './resources/logs';
 import { MessageManager } from './resources/message';
 import { OTPManager } from './resources/otp';
 import { SegmentManager } from './resources/segment';
+import { TagManager } from './resources/tag';
 import { TemplateManager } from './resources/template';
 import { WebhookManager } from './resources/webhook';
 import type { RewriteOptions } from './types';
@@ -31,6 +33,9 @@ export class Rewrite {
 	/** Webhook logs resource client. */
 	public readonly logs: LogManager;
 
+	/** Webhook delivery resource client. */
+	public readonly deliveries: DeliveryManager;
+
 	/** API key resource client. */
 	public readonly apiKeys: APIKeyManager;
 
@@ -42,6 +47,12 @@ export class Rewrite {
 
 	/** Template resource client. */
 	public readonly templates: TemplateManager;
+
+	/** Tag resource client. */
+	public readonly tags: TagManager;
+
+	/** Compatibility alias kept for previous webhook-log semantics. */
+	public readonly webhookLogs: DeliveryManager;
 
 	/**
 	 * Creates a new Rewrite client instance.
@@ -64,9 +75,12 @@ export class Rewrite {
 		this.contacts = new ContactManager(this.rest);
 		this.segments = new SegmentManager(this.rest);
 		this.logs = new LogManager(this.rest);
+		this.deliveries = new DeliveryManager(this.rest);
 		this.apiKeys = new APIKeyManager(this.rest);
 		this.webhooks = new WebhookManager(this.rest);
 		this.messages = new MessageManager(this.rest);
 		this.templates = new TemplateManager(this.rest);
+		this.tags = new TagManager(this.rest);
+		this.webhookLogs = this.deliveries;
 	}
 }

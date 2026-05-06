@@ -1,6 +1,7 @@
 import {
 	type RESTDeleteDetachSegmentContactData,
 	type RESTDeleteSegmentData,
+	type RESTDeleteSegmentsData,
 	type RESTGetListSegmentContactsData,
 	type RESTGetListSegmentContactsQueryParams,
 	type RESTGetListSegmentsData,
@@ -10,8 +11,12 @@ import {
 	type RESTPatchUpdateSegmentData,
 	type RESTPostAttachSegmentContactBody,
 	type RESTPostAttachSegmentContactData,
+	type RESTPostAttachSegmentContactsBody,
+	type RESTPostAttachSegmentContactsData,
 	type RESTPostCreateSegmentBody,
 	type RESTPostCreateSegmentData,
+	type RESTPostDetachSegmentContactsBody,
+	type RESTPostDetachSegmentContactsData,
 	Routes,
 	type Snowflake,
 } from '@rewritetoday/types';
@@ -21,18 +26,12 @@ import { BaseManager } from './base';
  * Segment resource operations.
  */
 export class SegmentManager extends BaseManager {
-	/**
-	 * Lists segments for a project.
-	 */
 	public async list(options?: RESTGetListSegmentsQueryParams) {
 		return await this.rest.get<RESTGetListSegmentsData>(
 			Routes.segments.list(options),
 		);
 	}
 
-	/**
-	 * Creates a segment for a project.
-	 */
 	public async create(options: RESTPostCreateSegmentBody) {
 		return await this.rest.post<RESTPostCreateSegmentData>(
 			Routes.segments.create(),
@@ -40,16 +39,17 @@ export class SegmentManager extends BaseManager {
 		);
 	}
 
-	/**
-	 * Fetches a segment by id.
-	 */
+	public async sweep(options: { ids: Snowflake[] }) {
+		return await this.deleteWithBody<RESTDeleteSegmentsData>(
+			Routes.segments.sweep(),
+			options,
+		);
+	}
+
 	public async get(id: Snowflake) {
 		return await this.rest.get<RESTGetSegmentData>(Routes.segments.get(id));
 	}
 
-	/**
-	 * Updates a segment by id.
-	 */
 	public async update(id: Snowflake, options: RESTPatchUpdateSegmentBody) {
 		return await this.rest.patch<RESTPatchUpdateSegmentData>(
 			Routes.segments.update(id),
@@ -57,18 +57,12 @@ export class SegmentManager extends BaseManager {
 		);
 	}
 
-	/**
-	 * Deletes a segment by id.
-	 */
 	public async delete(id: Snowflake) {
 		return await this.rest.delete<RESTDeleteSegmentData>(
 			Routes.segments.delete(id),
 		);
 	}
 
-	/**
-	 * Lists contacts attached to a segment.
-	 */
 	public async contacts(
 		id: Snowflake,
 		options?: RESTGetListSegmentContactsQueryParams,
@@ -78,25 +72,52 @@ export class SegmentManager extends BaseManager {
 		);
 	}
 
-	/**
-	 * Attaches a contact to a segment.
-	 */
-	public async attach(
+	public async attachContact(
 		id: Snowflake,
 		options: RESTPostAttachSegmentContactBody,
 	) {
 		return await this.rest.post<RESTPostAttachSegmentContactData>(
-			Routes.segments.contacts.attach(id),
+			Routes.segments.attachContact(id),
 			options,
 		);
 	}
 
-	/**
-	 * Detaches a contact from a segment.
-	 */
-	public async detach(id: Snowflake, contactId: Snowflake) {
-		return await this.rest.delete<RESTDeleteDetachSegmentContactData>(
-			Routes.segments.contacts.detach(id, contactId),
+	public async attachContacts(
+		id: Snowflake,
+		options: RESTPostAttachSegmentContactsBody,
+	) {
+		return await this.rest.post<RESTPostAttachSegmentContactsData>(
+			Routes.segments.attachContacts(id),
+			options,
 		);
+	}
+
+	public async detachContacts(
+		id: Snowflake,
+		options: RESTPostDetachSegmentContactsBody,
+	) {
+		return await this.rest.post<RESTPostDetachSegmentContactsData>(
+			Routes.segments.detachContacts(id),
+			options,
+		);
+	}
+
+	public async detachContact(id: Snowflake, contactId: Snowflake) {
+		return await this.rest.delete<RESTDeleteDetachSegmentContactData>(
+			Routes.segments.detachContact(id, contactId),
+		);
+	}
+
+	/** Compatibility alias. */
+	public async attach(
+		id: Snowflake,
+		options: RESTPostAttachSegmentContactBody,
+	) {
+		return await this.attachContact(id, options);
+	}
+
+	/** Compatibility alias. */
+	public async detach(id: Snowflake, contactId: Snowflake) {
+		return await this.detachContact(id, contactId);
 	}
 }

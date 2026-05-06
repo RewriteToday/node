@@ -85,7 +85,7 @@ Requests run through `@rewritetoday/rest`. HTTP failures can throw `HTTPError`.
 import { HTTPError } from '@rewritetoday/rest';
 
 try {
-	await rewrite.projects.get('invalid_id');
+	await rewrite.messages.get('invalid_id');
 } catch (error) {
 	if (error instanceof HTTPError) {
 		console.error('HTTP Error:', error.status, error.method, error.url);

@@ -6,11 +6,16 @@ import { WebhookManager } from '../src/resources/webhook';
 const webhooks = new WebhookManager({} as never);
 
 describe('Rewrite', () => {
-	test('exposes contacts and segments managers', () => {
+	test('exposes current documented managers', () => {
 		const rewrite = new Rewrite('rw_test');
 
 		expect(rewrite.contacts).toBeDefined();
 		expect(rewrite.segments).toBeDefined();
+		expect(rewrite.apiKeys).toBeDefined();
+		expect(rewrite.deliveries).toBeDefined();
+		expect(rewrite.logs).toBeDefined();
+		expect(rewrite.tags).toBeDefined();
+		expect(rewrite.webhookLogs).toBe(rewrite.deliveries);
 	});
 });
 

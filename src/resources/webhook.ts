@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import {
 	type RESTDeleteWebhookData,
+	type RESTDeleteWebhooksData,
 	type RESTGetListWebhooksData,
 	type RESTGetListWebhooksQueryParams,
 	type RESTGetWebhookData,
@@ -18,14 +19,6 @@ import { BaseManager } from './base';
  * Webhook resource operations.
  */
 export class WebhookManager extends BaseManager {
-	/**
-	 * Verifies whether a webhook payload was signed by Rewrite.
-	 *
-	 * Uses `process.env.REWRITE_WEBHOOK_SECRET` when no secret is provided and
-	 * returns `false` when the expected Svix headers or signature are missing.
-	 *
-	 * @throws {Error} When no webhook secret is available for verification.
-	 */
 	public verify({
 		headers,
 		payload,
@@ -61,9 +54,6 @@ export class WebhookManager extends BaseManager {
 		);
 	}
 
-	/**
-	 * Creates a webhook for a project.
-	 */
 	public async create(options: RESTPostCreateWebhookBody) {
 		return await this.rest.post<RESTPostCreateWebhookData>(
 			Routes.webhooks.create(),
@@ -71,9 +61,6 @@ export class WebhookManager extends BaseManager {
 		);
 	}
 
-	/**
-	 * Updates a webhook by id.
-	 */
 	public async update(id: Snowflake, options: RESTPatchUpdateWebhookBody) {
 		return await this.rest.patch<RESTPatchUpdateWebhookData>(
 			Routes.webhooks.update(id),
@@ -81,27 +68,25 @@ export class WebhookManager extends BaseManager {
 		);
 	}
 
-	/**
-	 * Deletes a webhook by id.
-	 */
 	public async delete(id: Snowflake) {
 		return await this.rest.delete<RESTDeleteWebhookData>(
 			Routes.webhooks.delete(id),
 		);
 	}
 
-	/**
-	 * Lists webhooks for a project.
-	 */
+	public async sweep(options: { ids: Snowflake[] }) {
+		return await this.deleteWithBody<RESTDeleteWebhooksData>(
+			Routes.webhooks.sweep(),
+			options,
+		);
+	}
+
 	public async list(options?: RESTGetListWebhooksQueryParams) {
 		return await this.rest.get<RESTGetListWebhooksData>(
 			Routes.webhooks.list(options),
 		);
 	}
 
-	/**
-	 * Fetches a webhook by id.
-	 */
 	public async get(id: Snowflake) {
 		return await this.rest.get<RESTGetWebhookData>(Routes.webhooks.get(id));
 	}

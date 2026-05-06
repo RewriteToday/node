@@ -5,10 +5,10 @@ import type {
 } from '@rewritetoday/types';
 
 /** Options to send when creating a new OTP message. */
-export interface SendOTPMessageOptions extends RESTPostSendOTPMessageBody {
+export type SendOTPMessageOptions = RESTPostSendOTPMessageBody & {
 	/** Idempotency key to use in "Idempotency-Key" header. */
 	idempotencyKey?: string;
-}
+};
 
 /** Options to send when verifing an OTP message. */
 export interface VerifyOTPOptions extends RESTPostVerifyOTPCodeBody {

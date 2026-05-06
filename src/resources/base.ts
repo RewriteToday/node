@@ -13,4 +13,21 @@ export abstract class BaseManager {
 	public constructor(rest: REST) {
 		this.rest = rest;
 	}
+
+	/**
+	 * Uses the underlying REST client request path to support DELETE endpoints with JSON bodies.
+	 */
+	protected async deleteWithBody<R>(route: string, data?: unknown) {
+		return await (
+			this.rest as unknown as {
+				request<T>(
+					targetRoute: string,
+					options: { data?: unknown; method: 'DELETE' },
+				): Promise<T>;
+			}
+		).request<R>(route, {
+			method: 'DELETE',
+			data,
+		});
+	}
 }

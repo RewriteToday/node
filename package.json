@@ -1,6 +1,6 @@
 {
 	"name": "rewritetoday",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/rewritetoday/node.git"
@@ -50,6 +50,6 @@
 	"types": "./dist/index.d.ts",
 	"dependencies": {
 		"@rewritetoday/rest": "^1.0.1",
-		"@rewritetoday/types": "^1.0.4"
+		"@rewritetoday/types": "^1.1.0"
 	}
 }

@@ -3,6 +3,10 @@
 		"target": "ES2022",
 		"module": "ES2022",
 		"moduleResolution": "bundler",
+		"baseUrl": ".",
+		"paths": {
+			"@rewritetoday/types": ["../types/types/index.ts"]
+		},
 		"strict": true,
 		"skipLibCheck": true,
 		"declaration": true,
